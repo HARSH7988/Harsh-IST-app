@@ -1,0 +1,77 @@
+{% extends "user_layout.html" %}
+
+{% block content %}
+<h2 class="text-center my-4">Search Results</h2>
+
+<div class="container mt-4">
+    <!-- Search Form -->
+    <form method="GET" action="{{ url_for('search') }}">
+        <div class="input-group mb-4">
+            <input type="text" class="form-control" placeholder="Search subjects, chapters, quizzes..." name="query" value="{{ request.args.get('query', '') }}">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </form>
+
+    {% if query %}
+        <h5 class="mb-4">Results for: "<strong>{{ query }}</strong>"</h5>
+
+        <!-- Subjects -->
+        {% if subjects %}
+            <h4 class="mb-3">Subjects</h4>
+            <div class="row">
+                {% for subject in subjects %}
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm border-0" style="border-radius: 16px;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ subject.name }}</h5>
+                            <p class="card-text">{{ subject.description }}</p>
+                            <a href="/chapteers/{{ subject.id }}" class="btn btn-primary btn-sm">View Chapters</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Chapters -->
+        {% if chapters %}
+            <h4 class="mb-3 mt-5">Chapters</h4>
+            <div class="row">
+                {% for chapter in chapters %}
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm border-0" style="border-radius: 16px;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ chapter.name }}</h5>
+                            <p class="card-text">{{ chapter.description }}</p>
+                            <a href="/quizzees/{{ chapter.id }}" class="btn btn-primary btn-sm"> View Quizzes</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Quizzes -->
+        {% if quizzes %}
+            <h4 class="mb-3 mt-5">Quizzes</h4>
+            <div class="row">
+                {% for quiz in quizzes %}
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm border-0" style="border-radius: 16px;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ quiz.name }}</h5>
+                            <p class="card-text">{{ quiz.description }}</p>
+                            <a href="/questionss/{{ quiz.id }}" class="btn btn-warning btn-sm">Start Quiz</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if not subjects and not chapters and not quizzes %}
+            <p class="text-muted">No results found for "<strong>{{ query }}</strong>"</p>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

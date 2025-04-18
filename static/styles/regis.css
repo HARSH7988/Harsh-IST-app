@@ -1,0 +1,156 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url(/QUIZMASTER/static/images/back.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+/* Header */
+header {
+    background: #f8f9fa;
+    padding: 0px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Container */
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 80vh;
+    padding: 20px;
+}
+
+/* Left Side Content */
+.text-content {
+    width: 40%;
+    text-align: left;
+    font-weight: bold;
+}
+
+/* Register Button */
+.register-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.register-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Right Side Login Box */
+#canvaslog {
+    border-radius: 10px;
+    padding: 40px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 375px;
+    text-align: center;
+    margin-left: auto; /* Pushes login box to the right */
+   
+}
+
+/* Form Styling */
+#form-body {
+    border: 1px solid #007bff;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f1f1f1;
+    width: 100%;
+}
+
+.form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+#loginid, #pass {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+#loginid img, #pass img {
+    margin-right: 8px;
+}
+
+/* Submit Button */
+.btn-primary hover {
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+    transform: scale(1.05); 
+}
+
+/* Signup Link */
+#signup {
+    margin-top: 10px;
+}
+
+#signup a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+#signup a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.col-md-12 {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+
+.register-btn:hover {
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+    transform: scale(1.05); /* हल्का zoom effect */
+}
+footer {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: black;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: auto; /* Will push it to bottom if enough content */
+}
+header.bg-light.p-3.shadow {
+    padding: 0.5rem !important;
+}
+.center{
+    text-align: center;
+    margin: auto;
+    color: blue;
+
+}
+.err_msg{
+    text-align: right;
+    margin: auto;
+    color:rgb(105, 170, 7);
+
+}

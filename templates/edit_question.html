@@ -1,0 +1,49 @@
+{% extends "admin_layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Edit Question in {{ quiz.name }}</h2>
+
+    <form action="/edit_question/{{ question.id }}" method="POST">
+        <div class="form-group">
+            <label for="question_statement">Question Statement:</label>
+            <textarea id="question_statement" name="question_statement" rows="4" class="form-control" required>{{ question.question_statement }}</textarea>
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="option1">Option 1:</label>
+            <input type="text" id="option1" name="option1" class="form-control" value="{{ question.option1 }}" required />
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="option2">Option 2:</label>
+            <input type="text" id="option2" name="option2" class="form-control" value="{{ question.option2 }}" required />
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="option3">Option 3:</label>
+            <input type="text" id="option3" name="option3" class="form-control" value="{{ question.option3 }}" required />
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="option4">Option 4:</label>
+            <input type="text" id="option4" name="option4" class="form-control" value="{{ question.option4 }}" required />
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="correct_option">Correct Option:</label>
+            <select id="correct_option" name="correct_option" class="form-control">
+                <option value="{{ question.correct_option }}" selected>Current: {{ question.correct_option }}</option>
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+                <option value="option4">Option 4</option>
+            </select>
+        </div>
+
+        <!-- Submit and Cancel Buttons -->
+        <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
+        <a href="{{ url_for('question_dashboard', quiz_id=question.quiz_id) }}" class="btn btn-secondary mt-3">Cancel</a>
+    </form>
+</div>
+{% endblock %}

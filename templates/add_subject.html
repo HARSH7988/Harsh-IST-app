@@ -1,0 +1,16 @@
+{% extends "admin_layout.html" %}
+{% block content %}
+    <div class="centre"><h3>Add Subject</h3></div>
+    <form action="/subject" method="POST" class="row g-3">
+        <div class="input_form">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Subject Name" required>
+
+            <label for="description" class="form-label">Description:</label>
+            <textarea class="form-control" name="description" id="description" placeholder="Subject Description" rows="3" required></textarea>
+
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            <a href="/admin" class="btn btn-secondary mt-3">Cancel</a>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "user_layout.html" %}
+
+{% block content %}
+<h2 class="text-center my-4">{{ quiz.name }} Quiz</h2>
+
+<div class="container">
+    <!-- Timer Display -->
+    <h4 class="text-right mb-4">
+        Time Left: <span id="timer"></span>
+    </h4>
+
+    <!-- Quiz Form -->
+    <form method="POST" action="/submit_quiz/{{ quiz.id }}" id="quizForm">
+        {% if questions %}
+            {% for question in questions %}
+                <div class="card mb-4 shadow-sm border-0" style="border-radius: 16px;">
+                    <div class="card-body">
+                        <h5 class="mb-3">
+                            <span class="text-primary">Question {{ loop.index }}:</span>
+                        </h5>
+                        <p class="fs-5">{{ question.question_statement }}</p>
+
+                        <h6 class="mt-3">Options:</h6>
+                        <div class="list-group list-group-flush mb-3">
+                            <label class="list-group-item d-flex align-items-center">
+                                <input class="form-check-input me-2" type="radio" name="q{{ question.id }}" value="option1">
+                                <strong class="me-2">Option 1:&nbsp;</strong> {{ question.option1 }}
+                            </label>
+                            <label class="list-group-item d-flex align-items-center">
+                                <input class="form-check-input me-2" type="radio" name="q{{ question.id }}" value="option2">
+                                <strong class="me-2">Option 2:&nbsp;</strong> {{ question.option2 }}
+                            </label>
+                            <label class="list-group-item d-flex align-items-center">
+                                <input class="form-check-input me-2" type="radio" name="q{{ question.id }}" value="option3">
+                                <strong class="me-2">Option 3:&nbsp;</strong> {{ question.option3 }}
+                            </label>
+                            <label class="list-group-item d-flex align-items-center">
+                                <input class="form-check-input me-2" type="radio" name="q{{ question.id }}" value="option4">
+                                <strong class="me-2">Option 4:&nbsp;</strong> {{ question.option4 }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center">No questions available for this quiz.</p>
+        {% endif %}
+
+        <!-- Submit Button -->
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-success px-4">Submit</button>
+        </div>
+    </form>
+
+    <!-- Timer Display -->
+    <div id="timer" style="float: right; font-size: 24px; font-weight: bold; margin: 10px;"></div>
+
+    <style>
+        #timer {
+            font-weight: bold; color: green;
+            float: right; padding: 6px 12px;
+            font-size: 1.1rem;
+        }
+        .danger {
+            color: red !important;
+            animation: blink 1s step-start infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+
+    <!-- Timer Script -->
+    <script>
+        let totalTime = parseInt("{{ quiz.time_duration|default(0) }}") * 60;  // Total time in seconds
+        const timerElement = document.getElementById("timer");
+        const quizForm = document.getElementById("quizForm");
+
+        function updateTimerDisplay(seconds) {
+            const min = String(Math.floor(seconds / 60)).padStart(2, '0');
+            const sec = String(seconds % 60).padStart(2, '0');
+            timerElement.textContent = `${min}:${sec}`;
+        }
+
+        updateTimerDisplay(totalTime);
+
+        const countdown = setInterval(() => {
+            totalTime--;
+            updateTimerDisplay(totalTime);
+
+            if (totalTime <= 10) {
+                timerElement.classList.add("danger");
+            }
+
+            if (totalTime <= 0) {
+                clearInterval(countdown);
+                quizForm.submit();  // Automatically submit the form
+            }
+        }, 1000);
+    </script>
+</div>
+{% endblock %}

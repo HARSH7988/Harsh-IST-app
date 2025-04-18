@@ -1,0 +1,37 @@
+{% extends "admin_layout.html" %}
+
+{% block content %}
+<h2>Subjects</h2>
+<div class="container mt-3">
+    {% if subjects %}
+        <div class="row">
+            {% for subject in subjects %}
+            <div class="col-md-4 mb-4">
+                <!-- Card for each subject -->
+                <div class="card" style="width: 18rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: 0.3s;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ subject.name }}</h5>
+                        <p class="card-text">{{ subject.description }}</p>
+                        
+                        <!-- Add Chapter Button -->
+                        <a href="/chapters/{{ subject.id }}" class="btn btn-primary btn-sm">Chapters</a>
+                        
+                        <!-- Edit/Delete Buttons -->
+                        <a href="/edit_subject/{{ subject.id }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="/delete_subject/{{ subject.id }}" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No subjects available. Add a new subject!</p>
+    {% endif %}
+</div>
+
+<div class="mt-4">
+    <!-- Add Subject Button -->
+    <a href="/subject" class="btn btn-success">+Add Subject</a>
+</div>
+
+{% endblock %}

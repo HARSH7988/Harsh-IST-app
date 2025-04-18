@@ -1,0 +1,8 @@
+{% extends 'user_layout.html' %}
+{% block content %}
+<div class="container mt-5 text-center">
+    <h2>🎯 Quiz Result</h2>
+    <h3 class="my-3">You Scored: <strong>{{ score }}</strong> out of <strong>{{ total }}</strong></h3>
+    <a href="{{ url_for('summary') }}" class="btn btn-info mt-4">View Summary</a>
+</div>
+{% endblock %}

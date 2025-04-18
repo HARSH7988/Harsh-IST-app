@@ -1,0 +1,35 @@
+{% extends "admin_layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Admin Profile</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Date of Birth</th>
+                <th>Qualification</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for admin in admins %}
+            <tr>
+                <td>{{ admin.full_name }}</td>
+                <td>{{ admin.email }}</td>
+                <td>{{ admin.password }}</td>
+                <td>{{ admin.dob }}</td>
+                <td>{{ admin.qualification }}</td>
+                <td>
+                    <!-- Edit Button -->
+                    <a href="{{ url_for('edit_admin', id=admin.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "admin_layout.html" %}
+
+{% block content %}
+<h2>Quizzes in {{ chapter.name }}</h2>
+<div class="container mt-3">
+    {% if quizzes %}
+        <div class="row">
+            {% for quiz in quizzes %}
+            <div class="col-md-4 mb-4">
+                <!-- Card for each quiz -->
+                <div class="card" style="width: 18rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: 0.3s;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ quiz.name }}</h5>
+                        <p><strong>Date:</strong> {{ quiz.date_of_quiz }}</p>
+                        <p><strong>Duration:</strong> {{ quiz.time_duration }}</p>
+
+                        <!-- View Questions Button -->
+                        <a href="/questions/{{ quiz.id }}" class="btn btn-primary btn-sm">Questions</a>
+
+                        <!-- Edit/Delete Buttons -->
+                        <a href="/edit_quiz/{{ quiz.id }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="/delete_quiz/{{ quiz.id }}" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No quizzes available for this chapter.</p>
+        
+    {% endif %}
+</div>
+
+<div class="mt-4">
+    <!-- Add Quiz Button -->
+    <a href="/quiz/{{ chapter.id }}" class="btn btn-success">Add Quiz</a>
+    <a href="{{ url_for('chapter_dashboard', subject_id=chapter.subject.id) }}" class="register-btn btn btn-primary">Back</a>
+    
+</div>
+
+{% endblock %}

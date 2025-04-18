@@ -1,0 +1,36 @@
+{% extends "user_layout.html" %}
+
+{% block content %}
+<h2>Quizzes in {{ chapter.name }}</h2>
+<div class="container mt-3">
+    {% if quizzes %}
+        <div class="row">
+            {% for quiz in quizzes %}
+            <div class="col-md-4 mb-4">
+                <!-- Card for each quiz -->
+                <div class="card" style="width: 18rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: 0.3s;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ quiz.name }}</h5>
+                        <p><strong>Date:</strong> {{ quiz.date_of_quiz }}</p>
+                        <p><strong>Duration:</strong> {{ quiz.time_duration }}</p>
+
+                        <!-- View Questions Button -->
+                        <a href="/questionss/{{ quiz.id }}" class="btn btn-primary btn-sm">Start Quiz</a>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No quizzes available for this chapter.</p>
+        
+    {% endif %}
+</div>
+
+<div class="mt-4">
+    <a href="{{ url_for('chapter_dashboard1', subject_id=chapter.subject.id) }}" class="register-btn btn btn-primary">Back</a>
+    
+</div>
+
+{% endblock %}

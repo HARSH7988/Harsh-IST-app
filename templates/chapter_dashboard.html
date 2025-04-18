@@ -1,0 +1,39 @@
+{% extends "admin_layout.html" %}
+
+{% block content %}
+<h2>Chapters for {{ subject.name }}</h2>
+<div class="container mt-3">
+    {% if chapters %}
+        <div class="row">
+            {% for chapter in chapters %}
+            <div class="col-md-4 mb-4">
+                <!-- Card for each chapter -->
+                <div class="card" style="width: 18rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: 0.3s;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ chapter.name }}</h5>
+                        <p class="card-text">{{ chapter.description }}</p>
+                        
+                        <!-- Add Quiz Button -->
+                        <a href="/quizzes/{{ chapter.id }}" class="btn btn-primary btn-sm">Quizzes</a>
+                        
+                        <!-- Edit/Delete Buttons -->
+                        <a href="/edit_chapter/{{ chapter.id }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="/delete_chapter/{{ chapter.id }}" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No chapters available for this subject. Add a new chapter!</p>
+    {% endif %}
+</div>
+
+<div class="mt-4">
+    <!-- Add Chapter Button -->
+    <a href="/chapter/{{ subject.id }}" class="btn btn-success">+Add Chapter</a>
+    <a href="/admin" class="register-btn btn btn-primary">Back</a>
+
+</div>
+
+{% endblock %}

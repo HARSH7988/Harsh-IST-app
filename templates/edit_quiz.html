@@ -1,0 +1,32 @@
+{% extends "admin_layout.html" %}
+
+{% block content %}
+<h2>Edit Quiz: {{ quiz.name }}</h2>
+
+<form action="/edit_quiz/{{ quiz.id }}" method="POST">
+    <!-- Quiz Name -->
+    <div class="form-group mt-3">
+        <label for="name">Quiz Name:</label>
+        <input type="text" id="name" name="name" value="{{ quiz.name }}" class="form-control" required />
+    </div>
+
+    <!-- Date of Quiz -->
+    <div class="form-group mt-3">
+        <label for="date_of_quiz">Date of Quiz:</label>
+        <input type="date" id="date_of_quiz" name="date_of_quiz" 
+               value="{{ quiz.date_of_quiz.strftime('%Y-%m-%d') }}" class="form-control" required />
+    </div>
+
+    <!-- Time Duration -->
+    <div class="form-group mt-3">
+        <label for="time_duration">Time Duration (Minutes)</label>
+        <input type="number" name="time_duration" id="time_duration" class="form-control"
+               value="{{ quiz.time_duration }}" required placeholder="Enter duration in minutes">
+    </div>
+
+    <!-- Submit and Cancel Buttons -->
+    <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
+    <a href="{{ url_for('quiz_dashboard', chapter_id=quiz.chapter_id) }}" class="btn btn-secondary mt-3">Cancel</a>
+</form>
+
+{% endblock %}

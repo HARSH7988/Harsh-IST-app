@@ -1,0 +1,48 @@
+{% extends "admin_layout.html" %}
+
+{% block content %}
+<h2>Questions in {{ quiz.name }}</h2>
+<div class="container mt-3">
+    {% if questions %}
+        {% for question in questions %}
+        <div class="card mb-4 shadow-sm border-0" style="border-radius: 16px;">
+            <div class="card-body">
+                <h5 class="mb-3">
+                    <span class="text-primary">Question {{ loop.index }}:</span>
+                </h5>
+                <p class="fs-5">{{ question.question_statement }}</p>
+        
+                <h6 class="mt-3">Options:</h6>
+                <div class="list-group list-group-flush mb-3">
+                    <div class="list-group-item"><strong>Option 1:</strong> {{ question.option1 }}</div>
+                    <div class="list-group-item"><strong>Option 2:</strong> {{ question.option2 }}</div>
+                    <div class="list-group-item"><strong>Option 3:</strong> {{ question.option3 }}</div>
+                    <div class="list-group-item"><strong>Option 4:</strong> {{ question.option4 }}</div>
+                </div>
+        
+                <p class="fw-bold text-success">
+                    ✅ Correct Option: {{ question.correct_option }}
+                </p>
+        
+                <div class="d-flex gap-2">
+                    <a href="/edit_question/{{ question.id }}" class="btn btn-outline-warning btn-sm px-3">✏️ Edit</a>
+                    <a href="/delete_question/{{ question.id }}" class="btn btn-outline-danger btn-sm px-3">🗑️ Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No questions available for this quiz.</p>
+        {% endif %}
+    </div>
+    
+    <div class="mt-4">
+        <!-- Add Question Button -->
+        <a href="/question/{{ quiz.id }}" class="btn btn-success">Add Question</a>
+        <a href="{{ url_for('quiz_dashboard', chapter_id=quiz.chapter_id) }}" class="register-btn btn btn-primary">Back</a>
+        
+
+    
+</div>
+
+{% endblock %}

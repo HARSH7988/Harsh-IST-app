@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/styles/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="my_container">
+        <!-- Header -->
+        <div class="centre"><h1>QuizMaster</h1></div>
+
+        <!-- Navigation Bar -->
+        <div class="my_panel">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3fefd;">
+                <div class="container-fluid">
+                    <!-- Welcome Message -->
+                    <span class="navbar-text">
+                        <div class="adm_msg">😊 Welcome, {{ session['full_name'] }}! 🎉</div>
+                    </span>
+
+                    <!-- Navigation Links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/admin">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/admin_profile">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/manage_users">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Logout</a>
+                        </li>
+                    </ul>
+
+                    <!-- Search Form -->
+                    <form class="d-flex mb-4" method="GET" action="{{ url_for('admsearch') }}">
+                        <input class="form-control me-2" type="search" name="query" placeholder="Search Subjects, Chapters, or Quizzes" aria-label="Search">
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                    </form>
+                </div>
+            </nav>
+
+            <!-- Dynamic Content Block -->
+            {% block content %}
+            <!-- Admin-specific content will be injected here -->
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-3">
+        Copyright &copy; 2025 HARSH QUIZMASTER | All Rights Reserved | ID: 23F2005517
+    </footer>
+</body>
+</html>
